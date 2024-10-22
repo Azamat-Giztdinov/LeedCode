@@ -8,15 +8,12 @@ class Solution:
     def kthLargestLevelSum(self, root: Optional[TreeNode], k: int) -> int:
         sum_array = []
         def levelNum(node, lvl):
-            if node is None:
-                return
+            if node is None: return
             if len(sum_array) == lvl:
                 sum_array.append(0)
             sum_array[lvl] += node.val
             levelNum(node.left, lvl + 1)
             levelNum(node.right, lvl + 1)
         levelNum(root, 0)
-        sum_array.sort()
-        if len(sum_array) >= k:
-            return sum_array[-k]
-        return -1
+        sum_array.sort(reverse=True)
+        return sum_array[k - 1] if len(sum_array) >= k else -1
