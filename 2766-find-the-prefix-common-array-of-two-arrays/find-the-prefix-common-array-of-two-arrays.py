@@ -1,7 +1,14 @@
 class Solution:
     def findThePrefixCommonArray(self, A: List[int], B: List[int]) -> List[int]:
-        n = len(A)
-        C = [0] * n
-        for i in range(n):
-            C[i] = len(set(A[:i + 1]) & set(B[:i + 1]))
-        return C
+        size = len(A)
+        present = defaultdict(int)
+        C = [0] * size
+        for i in range(size):
+            present[A[i]] += 1
+            if present[A[i]] == 2:
+                C[i] += 1
+            present[B[i]] += 1
+            if present[B[i]] == 2:
+                C[i] += 1
+            C[i] += C[i - 1] if i > 0 else 0
+        return C   
