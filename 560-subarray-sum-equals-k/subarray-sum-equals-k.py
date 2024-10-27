@@ -4,12 +4,11 @@ class Solution:
         d = defaultdict(int)
         d[0] = 1
         count = 0
-        summ = 0
+        runSum = 0
         for num in nums:
-            summ += num
-            count += d[summ - k]
-            d[summ] += 1
-
+            runSum += num
+            count += d[runSum - k]
+            d[runSum] += 1
         return count
         
         
