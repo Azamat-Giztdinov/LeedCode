@@ -7,8 +7,7 @@ class Solution:
             if s[i] != rest_s[-1]:
                 count = 1
                 rest_s += s[i]
-            else:
-                if count < 2:
-                    count+=1
-                    rest_s += s[i]
+            elif count < 2:
+                count+=1
+                rest_s += s[i]
         return rest_s
