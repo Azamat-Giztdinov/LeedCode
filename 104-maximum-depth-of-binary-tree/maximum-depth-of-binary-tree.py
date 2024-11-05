@@ -8,4 +8,17 @@ class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         if not root:
             return 0
-        return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
+        layer_nodes = [root]
+        lvl = 0
+        while layer_nodes:
+            next_layer_nodes = []
+            for node in layer_nodes:
+                if node.left:
+                    next_layer_nodes.append(node.left)
+                if node.right:
+                    next_layer_nodes.append(node.right)
+            lvl += 1
+            layer_nodes = next_layer_nodes
+        return lvl
+                
+        # return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
