@@ -1,20 +1,17 @@
 class Solution {
 public:
     int maxFreqSum(string s) {
-        map<char, int> chars;
+        unordered_map<char, int> chars;
         string vowel = "aeiou";
         int v_max_count = 0;
         int c_max_count = 0;
         for(auto i: s) {
-            if(chars.find(i) == chars.end()) {
-                chars[i] = 1;
-            } else {
-                chars[i] += 1;
-            }
+            ++chars[i];
+
             if(vowel.find(i) == std::string::npos) {
-                if(c_max_count < chars[i]) c_max_count = chars[i];
+                c_max_count = max(chars[i], c_max_count);
             } else {
-                if (v_max_count < chars[i]) v_max_count = chars[i];
+                v_max_count = max(v_max_count, chars[i]);
             }
         }
         return v_max_count + c_max_count;
